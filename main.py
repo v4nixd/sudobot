@@ -29,7 +29,7 @@ async def on_message(message):
             Embed = discord.Embed(title="Сервер мишани Rust", description="Памятка по серверу в расте", color=0xF58A42)
             Embed.add_field(name='Информация о сервере', value=f'IP - 104.234.252.167:28055 \n Последний вайп - {rustWipeDate} \n ', inline=False)
             await message.author.send(embed=Embed)
-            await ic(f'{message.author} used $rust using {message} in {message.channel}')
+            ic(f'{message.author} used $rust using {message} in {message.channel}')
 
         elif message.content.startswith('$clear'): #$clear
             async for message in message.channel.history(limit=100):
@@ -37,12 +37,12 @@ async def on_message(message):
                     await message.delete()
                 else:
                     await message.channel.purge()
-                    await ic(f'{message.author} used $clear using {message} in {message.channel}')
+                    ic(f'{message.author} used $clear using {message} in {message.channel}')
     
     if message.channel.id == 1219984758252240969:
         if message.content.startswith('$connect'): #$connect
             connectEmbed = discord.Embed(title="Успешно подключено, дальнейшее пользование ботом будет происходить тут.", description="Напишите */help* чтобы узнать больше команд.", color=0x88fc03)
             await message.author.send(embed=connectEmbed)
-            await ic(f'{message.author} used $connect using {message} in {message.channel}')
+            ic(f'{message.author} used $connect using {message} in {message.channel}')
 
 client.run('token')
