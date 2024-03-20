@@ -21,21 +21,22 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$rust'):
-        if isinstance(message.channel, discord.DMChannel):
+    if isinstance(message.channel, discord.DMChannel):
+        if message.content.startswith('$rust'):
             Embed = discord.Embed(title="Сервер мишани Rust", description="Памятка по серверу в расте", color=0xF58A42)
             Embed.add_field(name='Информация о сервере', value=f'IP - 104.234.252.167:28055 \n Последний вайп - {rustWipeDate} \n ', inline=False)
             await message.author.send(embed=Embed)
-    elif message.content.startswith('$connect'):
-        if message.channel.id == 1219984758252240969:
-            Embed = discord.Embed(title="Успешно подключено, дальнейшее пользование ботом будет происходить тут.", description="Напишите */help* чтобы узнать больше команд.", color=0x88fc03)
-            await message.author.send(embed=Embed)
-    elif message.content.startswith('$clear'):
-        if isinstance(message.channel, discord.DMChannel):
+
+        elif message.content.startswith('$clear'):
             async for message in message.channel.history(limit=100):
-                if message.author == client.user: #client.user or bot.user according to what you have named it
+                if message.author == client.user:
                     await message.delete()
-        else:
-            await message.channel.purge()
+                else:
+                    await message.channel.purge()
+    
+    if message.channel.id == 1219984758252240969:
+        if message.content.startswith('$connect'):
+            connectEmbed = discord.Embed(title="Успешно подключено, дальнейшее пользование ботом будет происходить тут.", description="Напишите */help* чтобы узнать больше команд.", color=0x88fc03)
+            await message.author.send(embed=connectEmbed)
 
 client.run('token')
